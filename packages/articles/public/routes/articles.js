@@ -26,7 +26,7 @@ angular.module('mean').config(['$stateProvider',
         // states for my app
         $stateProvider
             .state('all articles', {
-                url: '/articles',
+                url: '/articlesss',
                 templateUrl: 'articles/views/list.html',
                 resolve: {
                     loggedin: checkLoggedin
@@ -52,6 +52,14 @@ angular.module('mean').config(['$stateProvider',
                 resolve: {
                     loggedin: checkLoggedin
                 }
+            })
+            .state('do porra', {
+                url: '/porra',
+                templateUrl: 'public/system/views/form.html',
+                resolve: {
+                    loggedin: checkLoggedin
+                }
             });
+
     }
 ]);

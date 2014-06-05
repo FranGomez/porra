@@ -2,18 +2,22 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" itemscope="itemscope" itemtype="http://schema.org/Product">
 {% include '../includes/head.html' %}
 
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top" data-ng-include="'/public/system/views/header.html'" data-role="navigation"></div>
-    {% if adminEnabled %}
-    <section class="admin-menu">
-        <div data-ng-include="'/mean-admin/views/index.html'"></div>
-    </section>
-    {% endif %}
-    <section class="content">
-        <section class="container">
-            {% block content %}{% endblock %}
-        </section>
-    </section>
+<body ng-app="formApp">
+
+<!-- views will be injected here -->
+<div class="container">
+    <div ui-view></div>
+</div>
+
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+    <div class="jumbotron text-muted text-center">
+        <p>a tutorial by <a href="http://scotch.io" target="_blank">scotch.io</a></p>
+        <p><a href="http://scotch.io/tutorials/javascript/angularjs-multi-step-form-using-ui-router">Create a Multi-Step Form Using Angular and UI-Router</a></p>
+    </div>
+    </div>
+</div>
+
     {% include '../includes/foot.html' %}
 </body>
 
