@@ -13,33 +13,33 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
         // route to show our basic form (/form)
         .state('form', {
             url: '/form',
-            templateUrl: 'form.html',
+            templateUrl: 'public/system/views/form.html',
             controller: 'formController'
         })
-        
+    
         // nested states 
         // each of these sections will have their own view
         // url will be nested (/form/profile)
         .state('form.profile', {
             url: '/profile',
-            templateUrl: 'form-profile.html'
+            templateUrl: 'public/system/views/form-profile.html'
         })
         
         // url will be /form/interests
         .state('form.interests', {
             url: '/interests',
-            templateUrl: 'form-interests.html'
+            templateUrl: 'public/system/views/form-interests.html'
         })
         
         // url will be /form/payment
         .state('form.payment', {
             url: '/payment',
-            templateUrl: 'form-payment.html'
+            templateUrl: 'public/system/views/form-payment.html'
         });
        
     // catch all route
     // send users to the form page 
-    $urlRouterProvider.otherwise('/form/profile');
+    $urlRouterProvider.otherwise('/form/payment');
 })
 
 // our controller for the form
