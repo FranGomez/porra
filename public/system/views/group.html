@@ -1,0 +1,18 @@
+<ul >
+    <li ng-repeat="match in championship.matches | filter: showGroup">
+		<div class="btn-group" data-toggle="buttons">
+		  <label ng-class="{'btn': true, 'btn-primary': true,'active': match.result=='{{match.teamA.name}}'}">
+		    <input type="radio" ng-model="match.result" id="match.teamA.name" value="{{match.teamA.name}}" ng-change="handleClick(match)">
+		    <div class="flag {{match.teamA.flag}}"></div>{{match.teamA.name}}</input>
+		  </label>
+		  <label ng-class="{'btn': true, 'btn-primary': true,'active': match.result=='empate'}">
+		    <input type="radio" ng-model="match.result" id="empate" value="empate" ng-change="handleClick(match)">
+		    <div></div>empate</input>
+		  </label>
+		  <label ng-class="{'btn': true, 'btn-primary': true,'active': match.result=='{{match.teamB.name}}'}">
+		    <input type="radio" ng-model="match.result" id="match.teamB.name" value="{{match.teamB.name}}" ng-change="handleClick(match)">
+		    <div class="flag {{match.teamB.flag}}"></div>{{match.teamB.name}}</input>
+		  </label>
+		</div>      
+    </li>
+</ul>

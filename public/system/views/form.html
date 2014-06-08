@@ -1,5 +1,5 @@
 <div class="row">
-<div class="col-sm-8 col-sm-offset-2"  data-ng-controller="formController">
+<div class="col-sm-12"  data-ng-controller="formController">
 
   <div id="form-container">
   
@@ -8,24 +8,35 @@
           
           <!-- the links to our nested states using relative paths -->
           <!-- add the active class if the state matches our ui-sref -->
-          <ul>
-              <li ng-repeat="group in championship.groups">
-                  <a ui-sref-active="active" ui-sref="form.group({group:group.id})"> Grupo {{group.id}}</a>
-              </li>
-          </ul>
+
+          <div id="status-buttons" class="text-center" >
+              <a ng-repeat="group in championship.groups" ui-sref-active="active" ui-sref=".group({group:group.id})"> Grupo {{group.id}}</a>
+          </div>
           <div id="status-buttons" class="text-center">
               <a ui-sref-active="active" ui-sref=".profile"><span>1</span> Profile</a>
               <a ui-sref-active="active" ui-sref=".interests"><span>2</span> Interests</a>
               <a ui-sref-active="active" ui-sref=".payment"><span>3</span> Payment</a>
           </div>
       </div>
-      
-      <!-- use ng-submit to catch the form submission and use our Angular function -->
-      <form id="signup-form" ng-submit="processForm()" class="f16">
+      <div class="col-sm-12">    
+        <!-- use ng-submit to catch the form submission and use our Angular function -->
+        <form id="signup-form" ng-submit="processForm()" class="f16 col-sm-8" >
           <!-- our nested state views will be injected here -->
-          <div id="form-views" ui-view></div>
-      </form>
-  
+          <div id="form-views" ui-view="fase1"></div>
+        </form>
+
+        <div class="col-sm-4">
+          <div ui-view="classification" data-ng-controller="classificationController" class="f16"></div>
+        </div>
+
+      </div>
+
+      <div >    
+        <div ng-include="'public/system/views/rounds.html'" ></div>
+        <!-- use ng-submit to catch the form submission and use our Angular function -->
+        
+
+      </div>
   </div>
   
   <!-- show our formData as it is being typed -->

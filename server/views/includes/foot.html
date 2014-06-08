@@ -1,7 +1,15 @@
 {% for file in assets.core.js %}
     <script type="text/javascript" src="{{file}}"></script>
 {% endfor %}
-<script type="text/javascript" src="public/system/services/app2.js"></script>
+<script type="text/javascript" src="public/system/lib/underscore/underscore.js"></script>
+<script type="text/javascript" src="public/system/services/group.js"></script>
+<script type="text/javascript" src="public/system/services/classification.js"></script>
+
+<script type="text/javascript" src="public/system/services/round8Controller.js"></script>
+<script type="text/javascript" src="public/system/services/round4Controller.js"></script>
+<script type="text/javascript" src="public/system/services/round2Controller.js"></script>
+<script type="text/javascript" src="public/system/services/round1Controller.js"></script>
+
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-animate.min.js"></script>
 {% if (process.env.NODE_ENV == 'development') %}
     <!-- Livereload script rendered -->

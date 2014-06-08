@@ -1,0 +1,17 @@
+
+{{matches}}
+
+<ul>
+    <li ng-repeat="match in matches">
+    <div class="btn-group" data-toggle="buttons">
+      <label ng-class="{'btn': true, 'btn-primary': true,'active': match.winner=='{{match.teamA}}'}">
+        <input type="radio" ng-model="match.winner" id="match.teamA.name" value="{{match.teamA}}" ng-change="winA()">
+        <div class="flag {{match.teamA.flag}}"></div>{{match.teamA.name}}</input>
+      </label>
+      <label ng-class="{'btn': true, 'btn-primary': true,'active': match.winner=='{{$match.teamB}}'}">
+        <input type="radio" ng-model="match.winner" id="match.teamB.name" value="{{match.teamB}}" ng-change="winB()">
+        <div class="flag {{match.teamB.flag}}"></div>{{match.teamB.name}}</input>
+      </label>
+    </div>      
+    </li>
+</ul>

@@ -53,8 +53,8 @@ angular.module('mean').config(['$stateProvider',
                     loggedin: checkLoggedin
                 }
             })
-            .state('do porra', {
-                url: '/form',
+            .state('porra', {
+                url: '/porra',
                 templateUrl: 'public/system/views/form.html',
                 resolve: {
                     loggedin: checkLoggedin
