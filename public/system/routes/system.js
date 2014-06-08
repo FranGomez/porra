@@ -15,13 +15,12 @@ angular.module('mean.system').config(['$stateProvider', '$urlRouterProvider',
                 .state('auth', {
                     templateUrl: 'public/auth/views/index.html'
                 })
-                // route to show our basic form (/form)
                 .state('porra.group', {
                     url: '/group/:group',
                     views:{
                         'fase1@porra':{
                             templateUrl: 'public/system/views/group.html',
-                            controller: 'formController'
+                            controller: 'groupController'
                         },
                         'classification@porra':{
                             templateUrl:'public/system/views/classification.html',
@@ -30,25 +29,6 @@ angular.module('mean.system').config(['$stateProvider', '$urlRouterProvider',
                     }
                     
                 })
-                .state('.round8', {
-                    template: 'hola',
-                    controller: 'round8Controller'
-                })
-                .state('.round4', {
-                    template: 'hola',
-                    controller: 'round4Controller'
-                })
-                .state('.round2', {
-                    template: 'hola',
-                    controller: 'round2Controller'
-                })
-                .state('.round1', {
-                    template: 'hola',
-                    controller: 'round1Controller'
-                })
-                // nested states 
-                // each of these sections will have their own view
-                // url will be nested (/form/profile)
                 .state('porra.profile', {
                     url: '/profile',
                     templateUrl: 'public/system/views/form-profile.html'
@@ -124,10 +104,10 @@ angular.module('mean.system').config(['$stateProvider', '$urlRouterProvider',
             this.match = match;
             this.broadcastItem();
         };
-
         sharedService.broadcastItem = function() {
             $rootScope.$broadcast('handleResult');
         };
+
 
         return sharedService;
     });
@@ -187,30 +167,65 @@ var championship = {
             {"id":"47","result":"","group":"H","teamA":{"name":"Corea del Sur","flag":"kr"},"teamB":{"name":"Belgica","flag":"be"}},
             {"id":"48","result":"","group":"H","teamA":{"name":"Argelia","flag":"dz"},"teamB":{"name":"Rusia","flag":"ru"}},
 
-            {"id":"49","teamA":{"pos":"1","group":"A"},"teamB":{"pos":"2","group":"B"}},
-            {"id":"50","teamA":{"pos":"1","group":"C"},"teamB":{"pos":"2","group":"D"}},
-            {"id":"51","teamA":{"pos":"1","group":"B"},"teamB":{"pos":"2","group":"A"}},
-            {"id":"52","teamA":{"pos":"1","group":"D"},"teamB":{"pos":"2","group":"C"}},
-            {"id":"53","teamA":{"pos":"1","group":"E"},"teamB":{"pos":"2","group":"F"}},
-            {"id":"54","teamA":{"pos":"1","group":"G"},"teamB":{"pos":"2","group":"H"}},
-            {"id":"55","teamA":{"pos":"1","group":"F"},"teamB":{"pos":"2","group":"E"}},
-            {"id":"56","teamA":{"pos":"1","group":"H"},"teamB":{"pos":"2","group":"G"}},
+            {"id":"49","winner":{"name":""},"teamA":{"name":"","pos":"1","group":"A"},"teamB":{"name":"","pos":"2","group":"B"}},
+            {"id":"50","winner":{"name":""},"teamA":{"name":"","pos":"1","group":"C"},"teamB":{"name":"","pos":"2","group":"D"}},
+            {"id":"51","winner":{"name":""},"teamA":{"name":"","pos":"1","group":"B"},"teamB":{"name":"","pos":"2","group":"A"}},
+            {"id":"52","winner":{"name":""},"teamA":{"name":"","pos":"1","group":"D"},"teamB":{"name":"","pos":"2","group":"C"}},
+            {"id":"53","winner":{"name":""},"teamA":{"name":"","pos":"1","group":"E"},"teamB":{"name":"","pos":"2","group":"F"}},
+            {"id":"54","winner":{"name":""},"teamA":{"name":"","pos":"1","group":"G"},"teamB":{"name":"","pos":"2","group":"H"}},
+            {"id":"55","winner":{"name":""},"teamA":{"name":"","pos":"1","group":"F"},"teamB":{"name":"","pos":"2","group":"E"}},
+            {"id":"56","winner":{"name":""},"teamA":{"name":"","pos":"1","group":"H"},"teamB":{"name":"","pos":"2","group":"G"}},
 
-            {"id":"57","teamA":{"match":"49"},"teamB":{"match":"50"}},
-            {"id":"58","teamA":{"match":"53"},"teamB":{"match":"54"}},
-            {"id":"59","teamA":{"match":"51"},"teamB":{"match":"52"}},
-            {"id":"60","teamA":{"match":"55"},"teamB":{"match":"56"}},
+            {"id":"57","winner":{"name":""},"teamA":{"match":"49"},"teamB":{"match":"50"}},
+            {"id":"58","winner":{"name":""},"teamA":{"match":"53"},"teamB":{"match":"54"}},
+            {"id":"59","winner":{"name":""},"teamA":{"match":"51"},"teamB":{"match":"52"}},
+            {"id":"60","winner":{"name":""},"teamA":{"match":"55"},"teamB":{"match":"56"}},
 
-            {"id":"61","teamA":{"match":"57"},"teamB":{"match":"58"}},
-            {"id":"62","teamA":{"match":"59"},"teamB":{"match":"60"}},
+            {"id":"61","winner":{"name":""},"teamA":{"match":"57"},"teamB":{"match":"58"}},
+            {"id":"62","winner":{"name":""},"teamA":{"match":"59"},"teamB":{"match":"60"}},
 
-            {"id":"63","teamA":{"match":"61"},"teamB":{"match":"62"}}
+            {"id":"63","winner":{"name":""},"teamA":{"match":"61"},"teamB":{"match":"62"}}
 
     ]
 };
 
 
 var teams = [
+{"name":"Brasil","flag":"br","pos":"","points":"0","group":"A"},
+{"name":"Croacia","flag":"hr","pos":"","points":"0","group":"A"},
+{"name":"Mejico","flag":"mx","pos":"","points":"0","group":"A"},
+{"name":"Camerun","flag":"cm","pos":"","points":"0","group":"A"},
+{"name":"Espa;a","flag":"es","pos":"","points":"0","group":"B"},
+{"name":"Holanda","flag":"nl","pos":"","points":"0","group":"B"},
+{"name":"Chile","flag":"cl","pos":"","points":"0","group":"B"},
+{"name":"Australia","flag":"au","pos":"","points":"0","group":"B"},
+{"name":"Colombia","flag":"co","pos":"","points":"0","group":"C"},
+{"name":"Grecia","flag":"gr","pos":"","points":"0","group":"C"},
+{"name":"Costa de Marfil","flag":"ci","pos":"","points":"0","group":"C"},
+{"name":"Japon","flag":"jp","pos":"","points":"0","group":"C"},
+{"name":"Uruguay","flag":"uy","pos":"","points":"0","group":"D"},
+{"name":"Costa Rica","flag":"cr","pos":"","points":"0","group":"D"},
+{"name":"Inglaterra","flag":"_England","pos":"","points":"0","group":"D"},
+{"name":"Italia","flag":"it","pos":"","points":"0","group":"D"},
+{"name":"Suiza","flag":"ch","pos":"","points":"0","group":"E"},
+{"name":"Ecuador","flag":"ec","pos":"","points":"0","group":"E"},
+{"name":"Francia","flag":"fr","pos":"","points":"0","group":"E"},
+{"name":"Honduras","flag":"hn","pos":"","points":"0","group":"E"},
+{"name":"Argentina","flag":"ar","pos":"","points":"0","group":"F"},
+{"name":"Bosnia & Herzegovina","flag":"ba","pos":"","points":"0","group":"F"},
+{"name":"Iran","flag":"ir","pos":"","points":"0","group":"F"},
+{"name":"Nigeria","flag":"ng","pos":"","points":"0","group":"F"},
+{"name":"Alemania","flag":"de","pos":"","points":"0","group":"G"},
+{"name":"Portugal","flag":"pt","pos":"","points":"0","group":"G"},
+{"name":"Ghana","flag":"gh","pos":"","points":"0","group":"G"},
+{"name":"Estados Unidos","flag":"us","pos":"","points":"0","group":"G"},
+{"name":"Belgica","flag":"be","pos":"","points":"0","group":"H"},
+{"name":"Argelia","flag":"dz","pos":"","points":"0","group":"H"},
+{"name":"Rusia","flag":"ru","pos":"","points":"0","group":"H"},
+{"name":"Corea del Sur","flag":"kr","pos":"","points":"0","group":"H"}
+];
+
+/*var teams = [
 {"name":"Brasil","flag":"br","pos":"1","points":"0","group":"A"},
 {"name":"Croacia","flag":"hr","pos":"2","points":"0","group":"A"},
 {"name":"Mejico","flag":"mx","pos":"3","points":"0","group":"A"},
@@ -243,4 +258,4 @@ var teams = [
 {"name":"Argelia","flag":"dz","pos":"2","points":"0","group":"H"},
 {"name":"Rusia","flag":"ru","pos":"3","points":"0","group":"H"},
 {"name":"Corea del Sur","flag":"kr","pos":"4","points":"0","group":"H"}
-];
+];*/

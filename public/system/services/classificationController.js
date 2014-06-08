@@ -12,6 +12,7 @@ angular.module('mean.system').controller('classificationController', ['$scope', 
         };
      
         $scope.$on('handleResult', function() {
+            console.log("classificationController");
             _.chain($scope.teams)
             .filter(function(team){
                 return team.name == sharedService.match.teamA.name || team.name == sharedService.match.teamB.name;
@@ -29,6 +30,26 @@ angular.module('mean.system').controller('classificationController', ['$scope', 
                 .map(function(){
                     team.points=points;
                 });
+            });
+
+            console.log("CALCULANDO POSICIONES");
+            var position=0;
+            
+            _.sortBy(_.filter($scope.teams,function(team){
+                                    console.log("FILTRANDO");
+                                    return sharedService.match.group==team.group;
+                                }),function(team){ 
+                console.log("ORDENANDO" + team);
+                console.log(team.points);
+                return team.points;
+            })
+            .reverse()
+            .map(function(team){
+                console.log("ORDENANDO" + team.name);
+                console.log(team.points);
+                position++
+                team.pos=position;
+                console.log(team.pos);
             });
         });
     }

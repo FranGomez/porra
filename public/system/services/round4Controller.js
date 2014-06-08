@@ -6,42 +6,54 @@ angular.module('mean.system').controller('round4Controller', ['$scope', '$rootSc
         $scope.group = $stateParams.group;
         $scope.teams=teams;
 
+        $scope.matchesPrevios=_.filter(championship.matches,function(match){
+                return _.contains(["49","50","51","52","53","54","55","56"],match.id); 
+        }); 
+
+        console.log("PARTIDOS CUARTOS FINAL" + $scope.matches);
         $scope.showGroup = function(team){
             return team.group === $scope.group;
         };
-     
-        
 
-        $scope.$on('handleResult', function() {
-            console.log("handleResult");
-            var matchesPrevios=_.filter(championship.matches,function(match){
-                    return _.contains(["49","50","51","52","53","54","55","56"],match.id); 
-            }); 
-            $scope.matches = _.filter(championship.matches,function(match){
-                return _.contains(["57","58","59","60"],match.id); 
-            })
-            .map(function(match){
-                //console.log("MATCH: " + match.teamA.name);
-                _.map(matchesPrevios,function(matchPrevio){
-                    console.log("MATCHES PREVIOS WINNER" + matchPrevio.winner);
-                    /*if (team.pos==posA && team.group==groupA){
-                        console.log("EQUIPO CLASIFICADO" + team.name);
-                        match.teamA.name=team.name;
-                        match.teamA.flag=team.flag;
+
+        $scope.matches = _.filter(championship.matches,function(match){
+            return _.contains(["57","58","59","60"],match.id); 
+        })       
+        .map(function(match){
+                _.map($scope.matchesPrevios,function(matchPrevio){
+                    if (matchPrevio.id===match.teamA.match){
+                        match.teamA=matchPrevio.winner;
                     }
-                    if (team.pos==posB && team.group==groupB){
-                        console.log("EQUIPO CLASIFICADO " + team.name);
-                        match.teamB.name=team.name;
-                        match.teamB.flag=team.flag; 
-                    }*/
-                    
+                    if (matchPrevio.id===match.teamB.match){
+                        match.teamB=matchPrevio.winner;
+                    }
                 });
                 return match;
+        });
+
+        $scope.$on('handleResult', function() {
+            console.log("round3Controller");
+            console.log($scope.matches);
+            _.map($scope.matches,function(match){
+                _.map($scope.matchesPrevios,function(matchPrevio){
+                    if (matchPrevio.id===match.teamA.match){
+                        match.teamA=matchPrevio.winner;
+                    }
+                    if (matchPrevio.id===match.teamB.match){
+                        match.teamB=matchPrevio.winner;
+                    }
+                });
             });
         });
 
-        $scope.handleClick = function(match) {
-            console.log("Pasada por handleClick");
+        $scope.handleWinA = function(match) {
+            console.log('handleWinA');
+            match.winner.flag=match.teamA.flag;
+            sharedService.prepForBroadcast(match);
+        };
+        $scope.handleWinB = function(match) {
+            console.log('handleWinB');
+            match.winner.flag=match.teamB.flag;
             sharedService.prepForBroadcast(match);
         };
     }

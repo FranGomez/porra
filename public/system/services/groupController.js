@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.system').controller('formController', ['$scope', '$rootScope', '$stateParams', 'Global', 'Menus', 'championship','teams','sharedService',
+angular.module('mean.system').controller('groupController', ['$scope', '$rootScope', '$stateParams', 'Global', 'Menus', 'championship','teams','sharedService',
     function($scope, $rootScope, $stateParams, Global, Menus,championship,teams,sharedService) {
             // we will store all of our form data in this object
         $scope.formData = {};

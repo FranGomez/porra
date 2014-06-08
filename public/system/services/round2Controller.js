@@ -4,32 +4,57 @@ angular.module('mean.system').controller('round2Controller', ['$scope', '$rootSc
     function($scope, $rootScope, $stateParams, Global, Menus,championship,teams,sharedService) {
         
         $scope.group = $stateParams.group;
-        $scope.championship=championship;
         $scope.teams=teams;
 
+        $scope.matchesPrevios=_.filter(championship.matches,function(match){
+                return _.contains(["57","58","59","60"],match.id); 
+        }); 
+
+        console.log("PARTIDOS CUARTOS FINAL" + $scope.matches);
         $scope.showGroup = function(team){
             return team.group === $scope.group;
         };
-     
+
+
+        $scope.matches = _.filter(championship.matches,function(match){
+            return _.contains(["61","62"],match.id); 
+        })       
+        .map(function(match){
+                _.map($scope.matchesPrevios,function(matchPrevio){
+                    if (matchPrevio.id===match.teamA.match){
+                        match.teamA=matchPrevio.winner;
+                    }
+                    if (matchPrevio.id===match.teamB.match){
+                        match.teamB=matchPrevio.winner;
+                    }
+                });
+                return match;
+        });
+
         $scope.$on('handleResult', function() {
-            _.chain($scope.teams)
-            .filter(function(team){
-                return team.name == sharedService.match.teamA.name || team.name == sharedService.match.teamB.name;
-            })
-            .map(function(team){
-                var points=0;
-                _.chain($scope.championship.matches)
-                .filter(function(match){
-                    return (match.group==team.group) && 
-                            (match.teamA.name==team.name || match.teamB.name==team.name) && (match.result==team.name || match.result=='empate');
-                })
-                .map(function(match){
-                    return match.result==team.name?points=points+3:points=points+1;
-                })
-                .map(function(){
-                    team.points=points;
+            console.log("round2Controller");
+            console.log($scope.matches);
+            _.map($scope.matches,function(match){
+                _.map($scope.matchesPrevios,function(matchPrevio){
+                    if (matchPrevio.id===match.teamA.match){
+                        match.teamA=matchPrevio.winner;
+                    }
+                    if (matchPrevio.id===match.teamB.match){
+                        match.teamB=matchPrevio.winner;
+                    }
                 });
             });
         });
+
+        $scope.handleWinA = function(match) {
+            console.log('handleWinA');
+            match.winner.flag=match.teamA.flag;
+            sharedService.prepForBroadcast(match);
+        };
+        $scope.handleWinB = function(match) {
+            console.log('handleWinB');
+            match.winner.flag=match.teamB.flag;
+            sharedService.prepForBroadcast(match);
+        };
     }
 ]);

@@ -2,7 +2,7 @@
 
 // create our angular app and inject ngAnimate and ui-router 
 // =============================================================================
-angular.module('formApp', ['ngAnimate', 'ui.router'])
+angular.module('dasdfasdformApp', ['ngAnimate', 'ui.router'])
 
 // configuring our routes 
 // =============================================================================
@@ -50,9 +50,9 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
     $scope.formData = {};
     
     // function to process the form
-    $scope.processForm = function() {
+/*    $scope.processForm = function() {
         alert('awesome!');  
-    };
+    };*/
     
 });
 
