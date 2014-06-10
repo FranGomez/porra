@@ -1,13 +1,13 @@
 <h4>CUARTOS</h4>
 <ul>
-    <li ng-repeat="match in matches">
+    <li ng-repeat="match in matches | filter: showRound">
     <div class="btn-group" data-toggle="buttons">
-      <label ng-class="{'btn': true, 'btn-primary': true,'active': match.winner.name==='{{match.teamA.name}}'}">
-        <input type="radio" ng-model="match.winner.name" id="{{match.teamA.name}}" value="{{match.teamA.name}}" ng-change="handleWinA(match)">
+      <label ng-class="{'btn': true, 'btn-primary': true,'active': isWinner(match,match.teamA)}">
+        <input type="radio" ng-model="match.winner.name" id="{{match.teamA.name}}" value="{{match.teamA.name}}" ng-change="setWinner(match,match.teamA)">
         <div class="flag {{match.teamA.flag}}"></div>{{match.teamA.name}}</input>
       </label>
-      <label ng-class="{'btn': true, 'btn-primary': true,'active': match.winner.name==='{{match.teamB.name}}'}">
-        <input type="radio" ng-model="match.winner.name" id="{{match.teamB.name}}" value="{{match.teamB.name}}" ng-change="handleWinB(match)">
+      <label ng-class="{'btn': true, 'btn-primary': true,'active': isWinner(match,match.teamB)}">
+        <input type="radio" ng-model="match.winner.name" id="{{match.teamB.name}}" value="{{match.teamB.name}}" ng-change="setWinner(match,match.teamB)">
         <div class="flag {{match.teamB.flag}}"></div>{{match.teamB.name}}</input>
       </label>
     </div>      

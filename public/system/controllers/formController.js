@@ -4,8 +4,9 @@ angular.module('mean.system').controller('formController', ['$scope', '$rootScop
     function($scope, $rootScope, $http, $stateParams, Global, Menus,championship,teams,sharedService) {
 
     	$scope.championship=championship;
+        $scope.teams=teams;
 
-         $scope.formData = {};
+        $scope.formData = {};
     
 
 
