@@ -2,7 +2,7 @@
 
 // create our angular app and inject ngAnimate and ui-router 
 // =============================================================================
-angular.module('dasdfasdformApp', ['ngAnimate', 'ui.router'])
+angular.module('formApp', ['ngAnimate', 'ui.router'])
 
 // configuring our routes 
 // =============================================================================
@@ -13,7 +13,7 @@ angular.module('dasdfasdformApp', ['ngAnimate', 'ui.router'])
         // route to show our basic form (/form)
         .state('form', {
             url: '/form',
-            templateUrl: 'public/system/views/form.html',
+            templateUrl: 'public/system/views/forssm.html',
             controller: 'formController'
         })
     

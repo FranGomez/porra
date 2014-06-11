@@ -3,19 +3,16 @@
 angular.module('mean.system').controller('formController', ['$scope', '$rootScope', '$http', '$stateParams', 'Global', 'Menus', 'championship','teams','sharedService',
     function($scope, $rootScope, $http, $stateParams, Global, Menus,championship,teams,sharedService) {
 
-    	$scope.championship=championship;
-        $scope.teams=teams;
-
-        $scope.formData = {};
-    
-
+    console.log('En formController');
+    $scope.championship = championship.data;
 
     $scope.processForm = function() {
+        console.log("enviando form");
         $http({
             method : 'POST',
-            url : '/articles/createporra',
-            data : $scope.championship
-        }); 
+            url : '/porra',
+            data : {"campeonato":$scope.championship}
+        });
     };
 
     }

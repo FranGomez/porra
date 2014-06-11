@@ -1,9 +1,11 @@
 'use strict';
 
-angular.module('mean.system').controller('groupController', ['$scope', '$rootScope', '$stateParams', 'Global', 'Menus', 'championship','teams','sharedService',
-    function($scope, $rootScope, $stateParams, Global, Menus,championship,teams,sharedService) {
+angular.module('mean.system').controller('groupController', ['$scope', '$rootScope', '$stateParams', 'Global', 'Menus', 'championship','getchampionship','teams','sharedService',
+    function($scope, $rootScope, $stateParams, Global, Menus,championship,getchampionship,teams,sharedService) {
+        
+        $scope.championship = championship.data;
 
-        $scope.group=$stateParams.group
+        $scope.group=$stateParams.group;
 
         $scope.showGroup = function(match){
             return match.group === $stateParams.group;

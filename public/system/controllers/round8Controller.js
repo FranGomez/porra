@@ -2,15 +2,15 @@
 
 angular.module('mean.system').controller('round8Controller', ['$scope', '$rootScope', '$stateParams', 'Global', 'Menus', 'championship','teams','sharedService',
     function($scope, $rootScope, $stateParams, Global, Menus,championship,teams,sharedService) {
-        
-        //$scope.championship=championship;
+
+        $scope.championship = championship.data;
         $scope.group = $stateParams.group;
         $scope.teams = teams;
-        $scope.matches=
-        _.filter(championship.matches,function(match){
+        $scope.matches =
+        _.filter($scope.championship.matches,function(match){
                 return _.contains(["49","50","51","52","53","54","55","56"],match.id); 
         });
-
+        
         $scope.showGroup = function(match){
             return match.group === $scope.group;
         };
@@ -20,11 +20,12 @@ angular.module('mean.system').controller('round8Controller', ['$scope', '$rootSc
             .each(function(match){
                 _.each($scope.teams,function(team){
                     if (team.pos==match.teamA.pos && team.group == match.teamA.group){
+                        console.log("updateRound team"+ team);
                         match.teamA.name=team.name;
                         match.teamA.flag=team.flag;
                     }
                     if (team.pos==match.teamB.pos && team.group == match.teamB.group){
-                        
+                        console.log("updateRound team"+ team);
                         match.teamB.name=team.name;
                         match.teamB.flag=team.flag;
                     }
@@ -51,6 +52,7 @@ angular.module('mean.system').controller('round8Controller', ['$scope', '$rootSc
             return match.winner.name==team.name;
         };
 
-        updateRound();
+        updateRound()
+        
     }
 ]);

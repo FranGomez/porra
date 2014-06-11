@@ -1,9 +1,12 @@
 'use strict';
 
-angular.module('mean.system').controller('HeaderController', ['$scope', '$rootScope', 'Global', 'Menus',
-    function($scope, $rootScope, Global, Menus) {
+angular.module('mean.system').controller('HeaderController', ['$scope', '$rootScope', 'Global', 'Menus', 'championship',
+    function($scope, $rootScope, Global, Menus, championship) {
+        
         $scope.global = Global;
         $scope.menus = {};
+
+
 
         // Default hard coded menu items for main menu
         var defaultMainMenu = [];

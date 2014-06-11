@@ -1,8 +1,7 @@
 <h4>Clasificacion Grupo {{group}}</h4>
 <ul class="list-group">
-  <li class="list-group-item" ng-repeat="team in teams | filter: showGroup | orderBy:'pos':false">
+  <li class="list-group-item" ng-repeat="team in teams | filter: getGroup | orderBy:'pos':false">
     <span class="badge">{{team.points}}</span>
     <div class="flag {{team.flag}}"></div>{{team.name}}
   </li>
 </ul>
-<!-- {{championship.matches}} -->

@@ -53,13 +53,44 @@ angular.module('mean').config(['$stateProvider',
                     loggedin: checkLoggedin
                 }
             })
-            .state('porra', {
+            .state('porra', { 
                 url: '/porra',
                 templateUrl: 'public/system/views/form.html',
+                controller: 'formController',
                 resolve: {
-                    loggedin: checkLoggedin
+                    loggedin: checkLoggedin,
+                    load: function (championship) {
+                        console.log("resolve:load ");
+                        return championship.load();
+                    }
                 }
             });
-
     }
-]);
+])
+.factory('championship', function($q, $timeout, $http) {
+    return { 
+        data : {},
+        load : function() {
+            var defer = $q.defer();
+            var data = this.data;
+            data.id = 'hola';
+            console.log('championshipBD');
+            $http({
+                method : 'GET',
+                url : '/porra'
+            })
+            .success(function(championship, status, headers, config) {
+                console.log("retrieving porra");
+                var championshipBD={}
+                data.year=championship[0].year;
+                data.host=championship[0].host;
+                data.matches=championship[0].matches;
+                data.groups=championship[0].groups;
+                //data.championship = championshipBD;
+
+                defer.resolve(data);
+            })
+            return defer.promise;
+        }
+    };
+});
